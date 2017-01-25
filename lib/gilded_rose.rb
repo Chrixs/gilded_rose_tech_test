@@ -11,14 +11,16 @@ class GildedRose
     end
   end
 
-  def item_special?(item)
-    aged_brie?(item) || backstage_passes?(item) || item_conjured?(item)
-  end
+  private
 
   def sort_items(item)
     item.sell_in -= 1 unless sulfuras?(item)
     sort_normal_quality(item) unless item_special?(item)
     sort_special_items(item) if item_special?(item)
+  end
+
+  def item_special?(item)
+    aged_brie?(item) || backstage_passes?(item) || item_conjured?(item)
   end
 
   def sort_special_items(item)
