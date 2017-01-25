@@ -50,6 +50,14 @@ class GildedRose
     item.sell_in <= 0
   end
 
+  def add_1_quality(item)
+    item.quality += 1 if item.quality < 50
+  end
+
+  def subtract_1_quality(item)
+    item.quality -= 1 if item.quality > 0
+  end
+
   def zero_sell_in(item)
     backstage_pass_quality_to_0(item) if backstage_passes?(item)
     subtract_1_quality(item) unless sulfuras?(item) || item_conjured?(item)
@@ -67,13 +75,6 @@ class GildedRose
     item.name == "Sulfuras, Hand of Ragnaros"
   end
 
-  def add_1_quality(item)
-    item.quality += 1 if item.quality < 50
-  end
-
-  def subtract_1_quality(item)
-    item.quality -= 1 if item.quality > 0
-  end
 
   def sort_brie_quality(item)
     item.quality += 2 if item.quality < 50 && item_sell_in_zero?(item)
